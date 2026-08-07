@@ -1,16 +1,41 @@
 # Project: <name>
 
 ## What this is
-<one-paragraph purpose>. Scope in SPEC.md; pass/fail criteria in ACCEPTANCE.md.
+<one-paragraph purpose>. Fill this in through conversation with Claude, not by hand:
+describe the project in one line, let Claude ask clarifying questions, then have it
+write the settled description back into this section. Everything else below is
+standing template.
 
 ## Workflow
-Driven by scripts/run.sh through gated stages (see pipeline.yaml). Do NOT skip gates.
-`run.sh auto` is the ONE sanctioned exception: it runs intake as a conversation, then answers
-every later human gate itself (repair menu = hybrid, red feature = skipped, green feature =
-auto-merged locally). Machine gates still have to pass -- auto never weakens them. Do not
-invoke it on my behalf; it is mine to start.
-Intake proposes per-project tools (MCP/plugins/skills): Claude proposes, I approve, I
-run state/init-tools.sh myself. Never auto-install or enable tools.
+No pipeline, no gated stages, no scripts/run.sh -- this is a plain conversation with
+Claude: describe what you want, iterate, ask Claude to build it. Use Plan Mode
+(Shift+Tab, or ask Claude to enter it) before anything non-trivial gets built.
+
+For independent work -- multiple features/modules that don't share files and don't
+depend on each other's output -- ask Claude to fan them out with the Workflow tool
+(parallel subagents, isolated per-feature git worktrees) instead of building them one
+at a time, then merge each back with `git merge --no-ff` once it looks right. Don't
+parallelize work that shares files or has a real dependency order; that stays a normal
+sequential conversation.
+
+On the FIRST conversation in a new project (the section above still reads
+`<one-paragraph purpose>`), Claude should also propose per-project tools (MCP servers /
+plugins / skills) suited to what's being built -- once. I approve what's useful and
+install it myself; Claude never auto-installs or enables tools. Once "What this is"
+holds a real description, don't re-propose tools in later sessions unless the project's
+scope changes substantially.
+
+## Plan Mode
+For a genuinely hard architecture/design call, switch to Fable manually before entering
+Plan Mode (`/model fable`), then switch back afterward (`/model sonnet` or
+`/model default`). Claude Code has no hook or setting that binds a specific model to
+Plan Mode automatically, so this is a manual step every time -- see
+`~/.claude/CLAUDE.md` > Models.
+
+## Model / effort indicator
+The terminal status line shows the current model (and reasoning effort, where Claude
+Code exposes it) -- see `.claude/statusline.sh`. It is not repeated at the end of every
+chat reply.
 
 ## Language
 Generated artifacts (code, comments, docs, commit messages, UI copy) default to English.
@@ -26,14 +51,18 @@ Shared personal UI direction: @~/.claude/rules/ui.md
 
 ## Stack recipes
 If the chosen stack matches a doc under docs/recipes/ (e.g. docs/recipes/
-tauri-desktop-app.md for a Tauri + pnpm desktop app), read it during intake/design and
-follow its documented patterns/gotchas -- each one there cost real debugging time on a
-prior project, not guessed in advance. If personal shared-infrastructure notes exist at
+tauri-desktop-app.md for a Tauri + pnpm desktop app), read it early and follow its
+documented patterns/gotchas -- each one there cost real debugging time on a prior
+project, not guessed in advance. If personal shared-infrastructure notes exist at
 ~/.claude/rules/infra.md (e.g. a self-hosted DB server reused across projects), check
 there too -- it stays out of this repo, never committed, since this template is public.
 
 ## Do not touch
-state/ (runtime), design tokens (change only via the design gate), auto-generated files.
+Design tokens (change only with my explicit approval), auto-generated files.
 
 ## Git
-Local only by default; do NOT push unless asked. Feature branches merge to main with --no-ff.
+Local only by default; do NOT push unless asked -- `git push` is allow-listed in
+`.claude/settings.json` (no confirmation popup) purely to remove friction once asked;
+it does not change the underlying policy. Feature branches merge to main with --no-ff.
+Commit and merge locally as work lands (see `~/.claude/CLAUDE.md` > Git) -- per-feature
+git worktree isolation is the safety boundary for parallel work, not permission prompts.

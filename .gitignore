@@ -1,14 +1,12 @@
-state/
 *.log
-# per-machine permission overrides (e.g. re-denying git push). build does `git add -A`,
-# so without this an untracked local settings file WOULD be committed.
+# per-machine permission overrides (e.g. re-denying git push) -- personal, not shared.
 .claude/settings.local.json
 .DS_Store
 node_modules/
 __pycache__/
 dist/
 coverage/
-# secrets -- never commit. build does `git add -A`, so an untracked .env WOULD be committed.
+# secrets -- never commit.
 .env
 .env.*
 !.env.example

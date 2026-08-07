@@ -80,8 +80,8 @@ every gotcha below cost real debugging time against a real CI matrix, not guesse
 - A **command-scaffold skill** for consistently wiring a new Rust `#[tauri::command]`
   together with its typed TS `invoke()` wrapper, so the JSON shape stays hand-synced
   correctly on both sides (there's no codegen for this by default).
-- For screenshots in a generated README (see `prompts/readme.md`): capture real,
-  privacy-checked screenshots from a running build rather than mocking up UI. On macOS,
+- For screenshots in a README: capture real, privacy-checked screenshots from a running
+  build rather than mocking up UI. On macOS,
   `CGWindowListCopyWindowInfo` + `screencapture -x -l<windowID>` captures one exact
   window precisely (never a broad screen capture that could show unrelated content);
   disambiguate between multiple same-named running instances by PID
