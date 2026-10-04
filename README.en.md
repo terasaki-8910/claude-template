@@ -29,6 +29,11 @@ claude-pipeline-template" below).
 - `docs/ui-rules.starter.md` -- starter content for `~/.claude/rules/ui.md` (your shared,
   cross-project UI direction file). Copy it once and refine it over time; it isn't specific
   to this project.
+- `docs/decision-sheet.md` -- the confirm-before-building procedure (decision sheets): choices
+  that are the user's get settled on one sheet with real samples, and nothing is built
+  before a GO. Written in Japanese; imported by `CLAUDE.md`.
+- `docs/decision-sheet-template.html` -- the sheet template (answers autosave, previous
+  answers reload, copy-answers fallback, click-to-enlarge images).
 - `docs/recipes/*.md` -- stack-specific known gotchas (e.g. a Tauri + pnpm desktop app).
   Claude reads the matching one early once the stack is chosen.
 
@@ -38,6 +43,10 @@ claude-pipeline-template" below).
 2. Shared UI direction across all projects: copy `docs/ui-rules.starter.md` to
    `~/.claude/rules/ui.md` and refine it over time. `~/.claude/CLAUDE.md` and
    `~/.claude/rules/` load in every project.
+3. (Optional) Use decision sheets in every project: copy `docs/decision-sheet.md` to
+   `~/.claude/rules/decision-sheet.md` and `docs/decision-sheet-template.html` to
+   `~/.claude/decision-sheet-template.html`, then delete the `@docs/decision-sheet.md`
+   line from each project's `CLAUDE.md` so it doesn't load twice.
 
 ## Per-project use
 1. On GitHub: make this a Template repository (Settings -> Template repository).

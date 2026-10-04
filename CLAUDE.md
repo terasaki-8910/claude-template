@@ -25,6 +25,14 @@ install it myself; Claude never auto-installs or enables tools. Once "What this 
 holds a real description, don't re-propose tools in later sessions unless the project's
 scope changes substantially.
 
+## Decisions
+Choices that are mine to make -- which reading of an ambiguous request, anything I will
+see, scope, open tradeoffs, conflicting instructions -- go through a decision sheet before
+anything is built. The procedure (written in Japanese) is imported below. If you copied it
+to `~/.claude/rules/decision-sheet.md` to use it in every project, delete the import line
+so it doesn't load twice.
+@docs/decision-sheet.md
+
 ## Plan Mode
 For a genuinely hard architecture/design call, switch to Fable manually before entering
 Plan Mode (`/model fable`), then switch back afterward (`/model sonnet` or

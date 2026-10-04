@@ -24,6 +24,10 @@ Claude Code で**1 つのプロジェクト**を、ゲート付きスクリプ�
   簡易抽出（effort は確実な値が取れないときは表示しない＝出さない方が安全という判断）。
 - `docs/ui-rules.starter.md` — `~/.claude/rules/ui.md`（全プロジェクト共通の UI 方針ファイル）の
   たたき台。一度コピーして育てるもので、このプロジェクト固有の内容ではない。
+- `docs/decision-sheet.md` — 作る前に確認する進め方（確認シート）。ユーザーが決めることを、本物の
+  見本を載せた1枚のシートで確かめ、GO をもらってから作る。`CLAUDE.md` から読み込まれる。
+- `docs/decision-sheet-template.html` — 確認シートの雛形（回答の自動保存・前回の回答の読み込み・
+  回答のコピー・画像の拡大）。
 - `docs/recipes/*.md` — スタック別の既知の落とし穴（例: Tauri + pnpm デスクトップアプリ）。
   該当するスタックを選んだら Claude が早めに読む。
 
@@ -33,6 +37,11 @@ Claude Code で**1 つのプロジェクト**を、ゲート付きスクリプ�
 2. 全プロジェクト共通の UI 方針：
    `docs/ui-rules.starter.md` を `~/.claude/rules/ui.md` にコピーして継続的に洗練する。
    `~/.claude/CLAUDE.md` と `~/.claude/rules/` は全プロジェクトで読み込まれる。
+3. （任意）確認シートの進め方を全プロジェクトで使う：
+   `docs/decision-sheet.md` を `~/.claude/rules/decision-sheet.md` に、
+   `docs/decision-sheet-template.html` を `~/.claude/decision-sheet-template.html` にコピーする。
+   そのときは、各プロジェクトの `CLAUDE.md` の `@docs/decision-sheet.md` の行を消す（同じ内容が
+   二重に読み込まれるため）。
 
 ## プロジェクトごとの使い方
 1. GitHub でこのリポジトリを Template repository に設定（Settings → Template repository）。
